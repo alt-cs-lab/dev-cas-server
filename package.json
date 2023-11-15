@@ -1,7 +1,7 @@
 {
-  "name": "test-cas-server",
+  "name": "dev-cas-server",
   "version": "1.0.0",
-  "description": "A CAS implementation to support development",
+  "description": "A CAS server implementation to support development",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
