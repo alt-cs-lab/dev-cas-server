@@ -24,6 +24,9 @@ jobs:
     # Run job on Ubuntu runner
     runs-on: ubuntu-latest
 
+    # Give all permissions
+    permissions: write-all
+
     # Job Steps
     steps:
       # Step 1 - Checkout the Repository
