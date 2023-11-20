@@ -116,24 +116,24 @@ jobs:
           generate_release_notes: true
 
       
-      # # Step 4 - Notify Discord for Deploy
-      # - name: Discord Deploy
-      #   env:
-      #     DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-      #   uses: Ilshidur/action-discord@master
-      #   with:
-      #     args: "Build Complete! Starting Deploy..."
+      # Step 4 - Notify Discord for Deploy
+      - name: Discord Deploy
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: "Build Complete! Starting Deploy..."
 
-      # # Step 5 - Deploy App
-      # - name: Deploy Stage
-      #   id: request
-      #   uses: fjogeleit/http-request-action@master
-      #   with:
-      #     url: 'https://watchtower.cs.ksu.edu/v1/update'
-      #     method: 'GET'
-      #     bearerToken: ${{ secrets.DEPLOY_TOKEN }}
-      #     timeout: 600000
+      # Step 5 - Deploy App
+      - name: Deploy Stage
+        id: request
+        uses: fjogeleit/http-request-action@master
+        with:
+          url: 'https://watchtower.cs.ksu.edu/v1/update'
+          method: 'GET'
+          bearerToken: ${{ secrets.DEPLOY_TOKEN }}
+          timeout: 600000
 
-      # # Step 6 - Show Response
-      # - name: Show Response
-      #   run: echo ${{ steps.request.outputs.response }}
+      # Step 6 - Show Response
+      - name: Show Response
+        run: echo ${{ steps.request.outputs.response }}
