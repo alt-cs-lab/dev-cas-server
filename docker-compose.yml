@@ -1,0 +1,7 @@
+services:
+  dev-cas-server:
+    build: .
+    container_name: dev-cas-server
+    restart: unless-stopped
+    ports:
+      - '4050:4050'

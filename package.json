@@ -4,7 +4,8 @@
   "description": "A CAS server implementation to support development",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=production node server.js"
   },
   "author": "Nathan H. Bean",
   "license": "MIT",
