@@ -66,13 +66,26 @@ app.get('/serviceValidate', (req, res) => {
 </cas:serviceResponse>
 `
   )
-  else res.send(
-`<cas:serviceResponse xmlns:cas='http://www.yale.edu/tp/cas'>
-  <cas:authenticationSuccess>
-      <cas:user>${username}</cas:user>
-      <cas:proxyGrantingTicket>${ticket}</cas:proxyGrantingTicket>
-  </cas:authenticationSuccess>
-</cas:serviceResponse>`);
+  else {
+    // We need to fake a WID, and ideally have it be unqiue
+    // We'll generate an integer hash of the username and  
+    // use the first 8 digits
+    var hash = 0, len = username.length;
+    for (var i = 0; i < len; i++) {
+      hash  = ((hash << 5) - hash) + username.charCodeAt(i);
+      hash |= 0; // to 32bit integer
+    }
+    // WIDs are 9 digits, and start with an 8
+    var wid = parseInt(hash.toString().slice(0,8), 10) + 8000000000;
+    res.send(
+      `<cas:serviceResponse xmlns:cas='http://www.yale.edu/tp/cas'>
+        <cas:authenticationSuccess>
+            <cas:user>${username}</cas:user>
+            <cas:ksuPersonWildcatID>${wid}</cas:ksuPersonWildcatID>
+            <cas:proxyGrantingTicket>${ticket}</cas:proxyGrantingTicket>
+        </cas:authenticationSuccess>
+      </cas:serviceResponse>`);
+  }
 });
 
 module.exports = app;
