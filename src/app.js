@@ -76,7 +76,7 @@ app.get('/serviceValidate', (req, res) => {
       hash |= 0; // to 32bit integer
     }
     // WIDs are 9 digits, and start with an 8
-    var wid = parseInt(hash.toString().slice(0,8), 10) + 8000000000;
+    var wid = parseInt(hash.toString().slice(0,8), 10) + 800000000;
     res.send(
       `<cas:serviceResponse xmlns:cas='http://www.yale.edu/tp/cas'>
         <cas:authenticationSuccess>
