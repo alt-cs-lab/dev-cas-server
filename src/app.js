@@ -75,6 +75,8 @@ app.get('/serviceValidate', (req, res) => {
       hash  = ((hash << 5) - hash) + username.charCodeAt(i);
       hash |= 0; // to 32bit integer
     }
+    // Hash may be negative, if so, set to positive
+    if(hash < 0) hash = -hash
     // WIDs are 9 digits, and start with an 8
     var wid = parseInt(hash.toString().slice(0,8), 10) + 800000000;
     res.send(
