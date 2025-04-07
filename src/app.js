@@ -49,7 +49,11 @@ app.post('/login', (req, res) => {
 // this only displays a page letting the user know they were 
 // logged out.
 app.get('/logout', (req, res) => {
-  res.sendFile('logout.html', sendFileOpts)
+  if(req.query.service) {
+    res.redirect(req.query.service)
+  } else {
+    res.sendFile('logout.html', sendFileOpts)
+  }
 });
 
 // Validate tickets.  If the ticket matches one in the memory store,
@@ -85,6 +89,9 @@ app.get('/serviceValidate', (req, res) => {
             <cas:user>${username}</cas:user>
             <cas:ksuPersonWildcatID>${wid}</cas:ksuPersonWildcatID>
             <cas:proxyGrantingTicket>${ticket}</cas:proxyGrantingTicket>
+            <cas:attributes>
+              <cas:ksuPersonWildcatId>${wid}</cas:ksuPersonWildcatId>
+            </cas:attributes>
         </cas:authenticationSuccess>
       </cas:serviceResponse>`);
   }
