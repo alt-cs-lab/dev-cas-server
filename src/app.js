@@ -59,7 +59,7 @@ app.get('/logout', (req, res) => {
 // Validate tickets.  If the ticket matches one in the memory store,
 // we respond with a success.  A production CAS server should do a 
 // more stringent security check.
-app.get('/serviceValidate', (req, res) => {
+const validateTicket = (req, res) => {
   const ticket = req.query.ticket;
   const username = tickets[ticket];
   if(!username) res.send(
@@ -95,6 +95,9 @@ app.get('/serviceValidate', (req, res) => {
         </cas:authenticationSuccess>
       </cas:serviceResponse>`);
   }
-});
+};
+
+app.get('/serviceValidate', validateTicket);
+app.get('/proxyValidate', validateTicket);
 
 module.exports = app;
