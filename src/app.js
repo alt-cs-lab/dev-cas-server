@@ -41,7 +41,13 @@ app.post('/login', (req, res) => {
   // Save the ticket so it can be validated later 
   tickets[ticket] = req.body.username;
   // Redirect the user back to the service url
-  const url = `${req.query.service}?ticket=${ticket}`;
+  let url;
+  // Append the ticket to the service URL, handling whether
+  // there are existing query parameters or not
+  if(req.query.service.find('?') === -1)
+    url = `${req.query.service}?ticket=${ticket}`;
+  else
+    url = `${req.query.service}&ticket=${ticket}`;
   res.redirect(url);
 });
 
