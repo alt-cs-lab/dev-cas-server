@@ -44,10 +44,10 @@ app.post('/login', (req, res) => {
   let url;
   // Append the ticket to the service URL, handling whether
   // there are existing query parameters or not
-  if(req.query.service.find('?') === -1)
-    url = `${req.query.service}?ticket=${ticket}`;
-  else
+  if(`${req.query.service}`.includes('?'))
     url = `${req.query.service}&ticket=${ticket}`;
+  else
+    url = `${req.query.service}?ticket=${ticket}`;
   res.redirect(url);
 });
 
