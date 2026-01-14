@@ -9,3 +9,5 @@ As you can see, this allows you to easily create and authenticate multiple users
 By default this server runs on port 4050. You can change that by setting a PORT environment variable.
 
 Autodeploy is now set up. Tag with SEMVER (vX.Y.Z) and push tags to deploy
+
+Service now properly redirects if there are query parameters in the login service. 
